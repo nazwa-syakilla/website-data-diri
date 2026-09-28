@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nazwa Syakilla | Profile</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f3f9ff; --bg2:#fff1f7; --ink:#2a3757; --muted:#6a7796;
+  --pink:#f9a8cb; --pink-d:#e8579b;
+  --blue:#a9d8fb; --blue-d:#3f9be0;
+  --card:rgba(255,255,255,.75); --line:#dbe7f5;
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{font-family:'Outfit',system-ui,sans-serif;background:linear-gradient(160deg,var(--bg),var(--bg2));background-attachment:fixed;color:var(--ink);line-height:1.7;font-size:17px;overflow-x:hidden}
+h1,h2,h3{font-family:'Syne',sans-serif;line-height:1.1}
+a{color:inherit}
+a:focus-visible,button:focus-visible{outline:3px solid var(--blue-d);outline-offset:3px}
+.wrap{max-width:1040px;margin:0 auto;padding:0 22px}
+
+/* Background blobs */
+.blob{position:fixed;border-radius:50%;filter:blur(80px);opacity:.55;z-index:-1;animation:drift 18s ease-in-out infinite alternate}
+.b1{width:420px;height:420px;background:var(--blue);top:-100px;left:-100px}
+.b2{width:380px;height:380px;background:var(--pink);bottom:-80px;right:-80px;animation-delay:-6s}
+.b3{width:260px;height:260px;background:#d9c8fb;top:45%;left:55%;opacity:.35;animation-delay:-12s}
+@keyframes drift{to{transform:translate(70px,50px) scale(1.15)}}
+
+/* Progress bar */
+#bar{position:fixed;top:0;left:0;height:4px;width:0;background:linear-gradient(90deg,var(--blue-d),var(--pink-d));z-index:20}
+
+/* Nav */
+header.nav{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.72);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;justify-content:space-between;align-items:center;padding-top:14px;padding-bottom:14px;gap:14px;flex-wrap:wrap}
+.nav b{font-family:'Syne',sans-serif;font-size:1.2rem;color:var(--pink-d)}
+.nav ul{list-style:none;display:flex;gap:6px;padding:0;flex-wrap:wrap}
+.nav a{text-decoration:none;color:var(--muted);padding:6px 14px;border-radius:999px;transition:.2s;font-size:.95rem}
+.nav a:hover{background:var(--blue);color:var(--ink)}
+
+/* Hero */
+.hero{padding:70px 0 40px}
+.hero .wrap{display:grid;grid-template-columns:1.15fr 1fr;gap:48px;align-items:center}
+.pill{display:inline-block;background:#fff;border:1px solid var(--line);padding:6px 16px;border-radius:999px;margin-bottom:18px;color:var(--blue-d);font-weight:500}
+.hero h1{font-size:clamp(2.6rem,7vw,4.6rem);font-weight:800;margin-bottom:10px;min-height:2.2em;
+  background:linear-gradient(90deg,var(--blue-d),var(--pink-d));-webkit-background-clip:text;background-clip:text;color:transparent}
+.role{font-size:1.4rem;color:var(--pink-d);font-weight:500;margin-bottom:16px;min-height:1.8em}
+.cursor{display:inline-block;width:3px;height:1em;background:var(--pink-d);margin-left:3px;vertical-align:-.12em;animation:blink .8s steps(1) infinite}
+.hero p.lead{color:var(--muted);max-width:46ch;margin-bottom:26px}
+.btn{display:inline-block;padding:13px 28px;border-radius:999px;text-decoration:none;font-weight:600;transition:.25s;margin-right:10px;margin-bottom:10px}
+.btn.main{background:linear-gradient(90deg,var(--pink-d),var(--blue-d));color:#fff;box-shadow:0 8px 24px rgba(232,87,155,.3)}
+.btn.ghost{border:2px solid var(--blue-d);color:var(--blue-d);background:rgba(255,255,255,.6)}
+.btn:hover{transform:translateY(-4px) scale(1.03)}
+.btn.ghost:hover{background:var(--blue-d);color:#fff}
+
+.photo-box{position:relative;animation:popIn 1s cubic-bezier(.2,.9,.3,1.2) .3s both}
+.ring{padding:6px;border-radius:220px 220px 30px 30px;background:conic-gradient(var(--pink),var(--blue),#d9c8fb,var(--pink));animation:floaty 5s ease-in-out infinite;box-shadow:0 16px 40px rgba(120,160,220,.3)}
+.photo{aspect-ratio:4/5;border-radius:214px 214px 26px 26px;overflow:hidden;background:linear-gradient(160deg,var(--blue),var(--pink));display:grid;place-items:center;position:relative}
+.photo::before{content:"NS";font-family:'Syne',sans-serif;font-size:5rem;font-weight:800;color:rgba(255,255,255,.75);position:absolute}
+.photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.chip{position:absolute;background:#fff;border:1px solid var(--line);padding:6px 14px;border-radius:999px;font-weight:600;font-size:.9rem;box-shadow:0 6px 18px rgba(100,130,190,.25);animation:floaty 4s ease-in-out infinite}
+.c1{top:8%;left:-14px;color:var(--blue-d)}
+.c2{bottom:22%;right:-12px;color:var(--pink-d);animation-delay:-1.5s}
+.c3{bottom:4%;left:6%;color:var(--blue-d);animation-delay:-3s}
+
+.in{opacity:0;transform:translateY(24px);animation:slideUp .7s ease forwards}
+.d1{animation-delay:.1s}.d2{animation-delay:.5s}.d3{animation-delay:.8s}.d4{animation-delay:1.1s}
+@keyframes slideUp{to{opacity:1;transform:none}}
+@keyframes popIn{from{opacity:0;transform:scale(.75)}to{opacity:1;transform:none}}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+@keyframes blink{50%{opacity:0}}
+
+/* Sections */
+section{padding:64px 0}
+h2{font-size:clamp(1.9rem,4.5vw,2.8rem);margin-bottom:10px}
+h2 span{color:var(--pink-d)}
+.sub{color:var(--muted);margin-bottom:34px;max-width:56ch}
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .7s ease,transform .7s ease}
+.reveal.show{opacity:1;transform:none}
+
+.about{display:grid;grid-template-columns:1.2fr 1fr;gap:36px;align-items:start}
+.about p{margin-bottom:16px;max-width:60ch}
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.fact{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px 18px;transition:.3s;box-shadow:0 4px 14px rgba(120,160,220,.12)}
+.fact:hover{transform:translateY(-6px) rotate(-1deg);border-color:var(--pink)}
+.fact small{display:block;color:var(--muted);font-size:.82rem}
+.fact strong{font-family:'Syne',sans-serif;font-size:1.05rem;color:var(--blue-d)}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:24px;transition:.3s;box-shadow:0 4px 14px rgba(120,160,220,.12)}
+.card:nth-child(odd):hover{background:#ffe9f3;border-color:var(--pink)}
+.card:nth-child(even):hover{background:#e6f3ff;border-color:var(--blue)}
+.card:hover{transform:translateY(-8px)}
+.card .ic{font-size:2.2rem;display:block;margin-bottom:8px;transition:.3s}
+.card:hover .ic{transform:scale(1.25) rotate(-8deg)}
+.card h3{font-size:1.15rem;margin-bottom:8px;color:var(--pink-d)}
+.card p{color:var(--muted);font-size:.97rem}
+
+/* Makanan favorit */
+.food-title{font-family:'Syne',sans-serif;font-size:1.4rem;margin:40px 0 16px}
+.foods{display:flex;flex-wrap:wrap;gap:12px}
+.food{background:#fff;border:2px solid var(--pink);border-radius:999px;padding:10px 22px;font-weight:600;transition:.3s;cursor:default}
+.food:nth-child(even){border-color:var(--blue)}
+.food:hover{transform:translateY(-5px) scale(1.06);background:linear-gradient(90deg,var(--pink),var(--blue));color:var(--ink)}
+
+/* Goals */
+.goals{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+.goal{background:var(--card);border:1px solid var(--line);border-top:6px solid var(--pink);border-radius:20px;padding:24px;box-shadow:0 4px 14px rgba(120,160,220,.12);transition:.3s}
+.goal:nth-child(2){border-top-color:var(--blue)}
+.goal:nth-child(3){border-top-color:#d9c8fb}
+.goal:hover{transform:translateY(-8px)}
+.goal h3{font-size:1.1rem;margin-bottom:10px;color:var(--blue-d)}
+.goal ul{padding-left:20px;color:var(--muted);font-size:.97rem}
+.goal li{margin-bottom:6px}
+
+.timeline{position:relative;max-width:700px;padding-left:34px}
+.timeline::before{content:"";position:absolute;left:8px;top:6px;bottom:6px;width:3px;background:linear-gradient(var(--pink),var(--blue));border-radius:3px}
+.step{position:relative;margin-bottom:26px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 20px;box-shadow:0 4px 14px rgba(120,160,220,.1)}
+.step::before{content:"";position:absolute;left:-34px;top:20px;width:19px;height:19px;border-radius:50%;background:var(--pink);border:4px solid var(--bg);box-shadow:0 0 0 3px var(--blue)}
+.step b{color:var(--blue-d);font-family:'Syne',sans-serif}
+.step p{color:var(--muted);font-size:.97rem}
+
+.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+.gallery figure{border-radius:20px;overflow:hidden;background:#fff;border:1px solid var(--line);transition:.35s;box-shadow:0 4px 14px rgba(120,160,220,.12)}
+.gallery figure:hover{transform:scale(1.05) rotate(-1.5deg);border-color:var(--pink);box-shadow:0 14px 34px rgba(249,168,203,.4)}
+.ph{aspect-ratio:1;background:linear-gradient(135deg,var(--blue),var(--pink));position:relative;display:grid;place-items:center;color:rgba(255,255,255,.85);font-family:'Syne',sans-serif}
+.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.gallery figcaption{padding:10px 16px;color:var(--muted);font-size:.92rem}
+
+.quote{text-align:center;background:linear-gradient(135deg,rgba(169,216,251,.5),rgba(249,168,203,.5));border:1px solid #fff;border-radius:30px;padding:54px 26px}
+.quote p{font-family:'Syne',sans-serif;font-size:clamp(1.4rem,3.4vw,2.2rem);max-width:24ch;margin:0 auto 12px;line-height:1.25}
+.quote small{color:var(--muted)}
+
+.contact{text-align:center}
+.contact .sub{margin-left:auto;margin-right:auto}
+
+footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);text-align:center;font-size:.92rem}
+
+@media(max-width:760px){
+  .hero .wrap,.about{grid-template-columns:1fr}
+  .photo-box{max-width:320px;margin:0 auto}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .in,.reveal,.photo-box{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+<div id="bar"></div>
+<div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+
+<header class="nav">
+  <div class="wrap">
+    <b>NS.</b>
+    <nav aria-label="Menu utama">
+      <ul>
+        <li><a href="#about">About Me</a></li>
+        <li><a href="#hobbies">Hobbies</a></li>
+        <li><a href="#why">Why IT</a></li>
+        <li><a href="#goals">Goals</a></li>
+        <li><a href="#journey">Journey</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="hero">
+    <div class="wrap">
+      <div>
+        <span class="pill in d1">Hello, world! 👋 I'm</span>
+        <h1 class="in d1"><span id="ketik"></span><span class="cursor"></span></h1>
+        <div class="role in d2"><span id="role"></span></div>
+        <p class="lead in d3">Mahasiswa Informatika yang suka belajar hal baru, senang bikin sesuatu dari nol, dan sedang menikmati langkah pertamanya di dunia teknologi.</p>
+        <div class="in d4">
+          <a class="btn main" href="#about">Get to know me</a>
+          <a class="btn ghost" href="#gallery">See my photos</a>
+        </div>
+      </div>
+
+      <!-- FOTO UTAMA: ganti foto-utama.jpg dengan nama fotomu -->
+      <div class="photo-box">
+        <div class="ring">
+          <div class="photo">
+            <img src="foto-utama.jpeg" alt="Foto Nazwa Syakilla" onerror="this.style.display='none'">
+          </div>
+        </div>
+        <span class="chip c1">🎮 Gamer</span>
+        <span class="chip c2">📖 Wattpad lover</span>
+        <span class="chip c3">💻 Coding</span>
+      </div>
+    </div>
+  </div>
+
+  <section id="about">
+    <div class="wrap reveal">
+      <h2>About <span>Me</span></h2>
+      <p class="sub">Kenalan dulu sebelum lanjut scroll.</p>
+      <div class="about">
+        <div>
+          <p>Halo, aku Nazwa Syakilla, lahir di Karang Baru pada 29 Januari 2007. Aku berasal dari Aceh Tamiang, tepatnya di Kecamatan Rantau.</p>
+          <p>Aku orangnya introvert. Di tempat ramai atau saat bertemu orang baru, aku lebih banyak diam dan mengamati. Tapi kalau sudah bertemu orang yang tepat, sisi extrovert-ku mulai keluar. Aku bisa jadi cerewet banget, ketawa lepas, dan susah berhenti ngobrol.</p>
+          <p>Aku orang yang santai, tapi punya rasa penasaran yang besar. Kalau ada hal baru, aku pasti ingin mencobanya, apalagi kalau berhubungan dengan teknologi. Setiap kali membuka website atau menggunakan aplikasi, aku selalu bertanya-tanya, “Ini dibuatnya gimana, ya?” Rasa penasaran itulah yang membawaku memilih Informatika.</p>
+          <p>Di luar kuliah, aku suka main game dengan santai, membaca Wattpad karena alur ceritanya bisa membuatku merasa ikut hidup di dalam cerita, dan maraton nonton drachin. Hal-hal itu bikin aku rileks. Untuk makanan, nasi goreng dan sate adalah favoritku.</p>
+          <p>Aku percaya bahwa belajar sedikit demi sedikit, tetapi konsisten, lebih baik daripada menunggu semuanya sempurna. Website ini adalah salah satu hasil dari proses belajarku, dan aku bangga bisa membuatnya sendiri.</p>
+        </div>
+        <div class="facts">
+          <div class="fact"><small>Full name</small><strong>Nazwa Syakilla</strong></div>
+          <div class="fact"><small>Born in</small><strong>Karang Baru</strong></div>
+          <div class="fact"><small>Birthday</small><strong>29 Januari 2007</strong></div>
+          <div class="fact"><small>Age</small><strong><span id="umur">0</span> tahun</strong></div>
+          <div class="fact"><small>Major</small><strong>Informatika</strong></div>
+          <div class="fact"><small>Mood</small><strong>Always learning ✨</strong></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="hobbies">
+    <div class="wrap reveal">
+      <h2>Hobbies &amp; <span>Favorites</span></h2>
+      <p class="sub">Hal-hal yang bikin harikuku lebih seru.</p>
+      <div class="cards">
+        <div class="card"><span class="ic">🎮</span><h3>Playing Games</h3><p>Main game itu cara favoritku melepas penat. Selain seru, game juga bikin aku penasaran gimana sih cara membuatnya.</p></div>
+        <div class="card"><span class="ic">📖</span><h3>Reading Wattpad</h3><p>Aku suka tenggelam dalam cerita di Wattpad. Dari situ aku belajar menyusun alur dan membayangkan banyak dunia.</p></div>
+        <div class="card"><span class="ic">🎬</span><h3>Watching Drachin</h3><p>Nonton drama Chinese adalah hiburan favoritku, terutama untuk maraton di akhir pekan.</p></div>
+      </div>
+
+      <h3 class="food-title">🍽️ Favorite Foods</h3>
+      <div class="foods">
+        <span class="food">🍳 Nasi Goreng</span>
+        <span class="food">🍢 Sate</span>
+        <span class="food">🍜 Mie Goreng</span>
+        <span class="food">🥣 Bakso</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="why">
+    <div class="wrap reveal">
+      <h2>Why I Chose <span>Informatics</span></h2>
+      <p class="sub">Enam alasan kenapa aku memilih jurusan ini.</p>
+      <div class="cards">
+        <div class="card"><span class="ic">🌍</span><h3>Technology is everywhere</h3><p>Hampir semua bidang sekarang bergantung pada teknologi, dari pendidikan sampai kesehatan. Aku ingin jadi bagian dari orang yang membuatnya.</p></div>
+        <div class="card"><span class="ic">🎮</span><h3>Inspired by games</h3><p>Karena suka main game, aku jadi penasaran bagaimana game dibuat. Rasa penasaran itu yang mendorongku belajar pemrograman.</p></div>
+        <div class="card"><span class="ic">🧩</span><h3>I love solving problems</h3><p>Aku senang menyusun langkah demi langkah sampai masalah selesai. Pemrograman terasa seperti teka-teki yang seru.</p></div>
+        <div class="card"><span class="ic">🛠️</span><h3>Build my own ideas</h3><p>Dengan Informatika, ide di kepala bisa jadi nyata, seperti website, aplikasi, atau sistem yang berguna bagi orang lain.</p></div>
+        <div class="card"><span class="ic">💼</span><h3>Wide career options</h3><p>Lulusan Informatika bisa bekerja di banyak bidang, jadi aku punya banyak pilihan untuk masa depanku.</p></div>
+        <div class="card"><span class="ic">📚</span><h3>Always something new</h3><p>Teknologi terus berkembang, jadi aku tidak akan pernah kehabisan hal baru untuk dipelajari.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="goals">
+    <div class="wrap reveal">
+      <h2>My <span>Goals</span></h2>
+      <p class="sub">Tujuanku masuk Informatika dan apa yang ingin aku capai.</p>
+      <div class="goals">
+        <div class="goal">
+          <h3>🌱 Short term</h3>
+          <ul>
+            <li>Menguasai dasar HTML, CSS, dan JavaScript</li>
+            <li>Belajar logika pemrograman dengan baik</li>
+            <li>Membuat proyek-proyek kecil sendiri</li>
+          </ul>
+        </div>
+        <div class="goal">
+          <h3>🌿 Mid term</h3>
+          <ul>
+            <li>Belajar PHP, database, dan framework</li>
+            <li>Membuat website atau aplikasi yang bermanfaat</li>
+            <li>Ikut lomba, organisasi, atau proyek tim</li>
+          </ul>
+        </div>
+        <div class="goal">
+          <h3>🌳 Long term</h3>
+          <ul>
+            <li>Menjadi developer yang profesional</li>
+            <li>Membuat karya teknologi yang berguna bagi orang banyak</li>
+            <li>Membanggakan orang tua dan keluargaku</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="journey">
+    <div class="wrap reveal">
+      <h2>My <span>Journey</span></h2>
+      <p class="sub">Perjalananku sejauh ini.</p>
+      <div class="timeline">
+        <div class="step"><b>2007</b><p>Lahir di Karang Baru pada 29 Januari. Awal dari semuanya.</p></div>
+        <div class="step"><b>Bertemu teknologi</b><p>Mulai penasaran dengan cara kerja game, komputer, internet, dan aplikasi di sekitarku.</p></div>
+        <div class="step"><b>Masuk Informatika</b><p>Memutuskan belajar Informatika untuk mengubah rasa penasaran menjadi kemampuan nyata.</p></div>
+        <div class="step"><b>2026</b><p>Membuat website profil pertamaku dengan HTML dan CSS, lalu menjalankannya di localhost XAMPP.</p></div>
+        <div class="step"><b>Next</b><p>Belajar JavaScript, PHP, dan database, lalu membuat proyek yang lebih besar.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="gallery">
+    <div class="wrap reveal">
+      <h2>Photo <span>Gallery</span></h2>
+      <p class="sub">Beberapa momen dan foto tentang aku.</p>
+      <div class="gallery">
+        <!-- TAMBAH FOTO: salin satu blok <figure>, lalu ganti src dan teksnya -->
+        <figure><div class="ph">Foto 1<img src="foto1.jpeg" alt="Foto 1" onerror="this.style.display='none'"></div><figcaption>Keterangan foto 1</figcaption></figure>
+        <figure><div class="ph">Foto 2<img src="foto2.jpeg" alt="Foto 2" onerror="this.style.display='none'"></div><figcaption>Keterangan foto 2</figcaption></figure>
+        <figure><div class="ph">Foto 3<img src="foto3.jpeg" alt="Foto 3" onerror="this.style.display='none'"></div><figcaption>Keterangan foto 3</figcaption></figure>
+
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap reveal">
+      <div class="quote">
+        <p>Small steps every day will take me far.</p>
+        <small>Motto belajarku</small>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="wrap reveal">
+      <h2>Let's <span>Connect</span></h2>
+      <p class="sub">Mau ngobrol, kolaborasi, atau sekadar say hi? Boleh banget.</p>
+      <a class="btn ghost" href="https://instagram.com/nzwasyakillaaa" target="_blank" rel="noopener">Instagram</a>
+    </div>
+  </section>
+</main>
+
+<footer>© 2026 Nazwa Syakilla. Made with HTML, CSS &amp; lots of curiosity.</footer>
+
+<script>
+  // Efek mengetik nama
+  var teks="Nazwa Syakilla", el=document.getElementById("ketik"), i=0;
+  (function ketik(){ if(i<=teks.length){ el.textContent=teks.slice(0,i++); setTimeout(ketik,90); } })();
+
+  // Teks peran yang berganti-ganti
+  var roles=["Informatics Student","Future Developer","Gamer at Heart","Curious Learner"], r=0, c=0, hapus=false, rl=document.getElementById("role");
+  (function loop(){
+    var t=roles[r];
+    rl.textContent=t.slice(0,c);
+    if(!hapus && c<t.length){ c++; setTimeout(loop,90); }
+    else if(!hapus){ hapus=true; setTimeout(loop,1400); }
+    else if(c>0){ c--; setTimeout(loop,45); }
+    else { hapus=false; r=(r+1)%roles.length; setTimeout(loop,300); }
+  })();
+
+  // Umur otomatis dari tanggal lahir 29 Januari 2007
+  var lahir=new Date(2007,0,29), now=new Date();
+  var umur=now.getFullYear()-lahir.getFullYear();
+  if(now<new Date(now.getFullYear(),0,29)) umur--;
+  document.getElementById("umur").textContent=umur;
+
+  // Muncul saat di-scroll
+  var obs=new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add("show"); obs.unobserve(e.target); }
+    });
+  },{threshold:.15});
+  document.querySelectorAll(".reveal").forEach(function(x){ obs.observe(x); });
+
+  // Garis progress scroll
+  addEventListener("scroll",function(){
+    var h=document.documentElement;
+    document.getElementById("bar").style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+"%";
+  });
+</script>
+</body>
+</html>
